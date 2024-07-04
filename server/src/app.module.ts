@@ -19,7 +19,7 @@ import { TimePayloadWorker } from './worker';
     BullModule.forRoot({
       connection: {
         host: process.env.REDIS_HOST,
-        port: Number(process.env.REDIS_PORT),
+        port: parseInt(process.env.REDIS_PORT, 10)
       }
     }),
     BullModule.registerQueue({ name: 'TimePayloadWorker' }),

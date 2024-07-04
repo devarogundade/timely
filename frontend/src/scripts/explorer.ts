@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Paged, TimePayload, TimePayloadEvent } from '@/types';
 
-const BASE_URL: string = 'http://20.75.182.10/';
+const BASE_URL: string = 'https://timelyblock.azurewebsites.net/';
 
 export async function allTimePayloads(page: number = 1, sender?: string): Promise<Paged<TimePayload[]> | null> {
     try {
