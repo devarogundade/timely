@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Teachers", sans-serif;
+  font-optical-sizing: auto;
+  text-decoration: none;
+  transition: .2s;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+}
+
+.app_width {
+  width: 1200px;
+  max-width: 100%;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
