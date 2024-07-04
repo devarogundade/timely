@@ -4,7 +4,7 @@
             <header>
                 <RouterLink to="/">
                     <div class="logo">
-                        <TimelyIcon />
+                        <img src="/images/logo.png" alt="logo">
                     </div>
                 </RouterLink>
 
@@ -56,14 +56,21 @@ section {
 
 header {
     width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
+    height: 80px;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
     align-items: center;
 }
 
-.logo svg {
-    width: 45px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+}
+
+.logo img {
+    height: 40px;
 }
 
 .logo,
@@ -75,11 +82,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .tab {
-    padding: 0 20px;
+    text-wrap: nowrap;
+    padding: 0 10px;
     font-size: 16px;
     height: 24px;
     font-weight: 500;

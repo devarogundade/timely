@@ -45,7 +45,9 @@
           <p>$TML is the native token of the Timely platform, serving as the essential currency for scheduling and
             executing time-based smart contract operations.
           </p>
-          <button>Buy $TML</button>
+          <a href="https://magentadex.xyz/airdrop" target="_blank" rel="noopener noreferrer">
+            <button>Claim free $TML</button>
+          </a>
         </div>
       </div>
     </section>
