@@ -52,18 +52,22 @@
                                         <td>
                                             <p class="payload_id">{{
                                                 total.valueOf() - ((index) + (15 * (currentPage.valueOf() - 1)))
-                                            }}</p>
+                                                }}</p>
                                         </td>
                                         <td>
                                             <div class="payload_status"
-                                                v-if="timePayloadEvent.status == TimePayloadEventStatus.SUCCESSFUL">
+                                                v-if="timePayloadEvent.status == TimePayloadEventStatus.SUCCESSFUL && indexCount > 0">
                                                 <SuccessfulIcon />
                                                 <p>Successful</p>
                                             </div>
                                             <div class="payload_status"
-                                                v-if="timePayloadEvent.status == TimePayloadEventStatus.FAILED">
+                                                v-if="timePayloadEvent.status == TimePayloadEventStatus.FAILED && indexCount > 0">
                                                 <FailedfulIcon />
                                                 <p>Failed</p>
+                                            </div>
+                                            <div class="payload_status" v-else>
+                                                <SuccessfulIcon />
+                                                <p>Condition not met.</p>
                                             </div>
                                         </td>
                                         <td>
@@ -132,7 +136,7 @@ import gsap from 'gsap';
 
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { TimePayloadEventStatus, type TimePayloadEvent } from '@/types';
+import { TimePayloadEventStatus, type TimePayloadEvent, type TimePayload } from '@/types';
 import OutIcon from '@/components/icons/OutIcon.vue';
 
 const search = ref<String | undefined>(undefined);
@@ -141,6 +145,7 @@ const timePayloadEvents = ref<TimePayloadEvent[] | undefined>(undefined);
 const total = ref<number>(0);
 const lastPage = ref<number>(0);
 const currentPage = ref<number>(1);
+const indexCount = ref<number>(0);
 
 const route = useRoute();
 
@@ -166,6 +171,7 @@ const getPayloads = async (page: number, refresh: boolean = false) => {
         lastPage.value = response.lastPage;
         timePayloadEvents.value = response.data;
         currentPage.value = page;
+        indexCount.value = ((JSON.parse(response.extra!) as TimePayload).eventsIndex) || 0;
     }
 
     loading.value = false;

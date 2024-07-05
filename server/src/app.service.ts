@@ -68,6 +68,7 @@ export class AppService {
     try {
       const filter = (identifier != 'undefined') ? { identifier } : {};
 
+      const timePayload = await this.timePayloadModel.findOne({ identifier });
       const total = await this.timePayloadEventModel.countDocuments(filter);
 
       const data = await this.timePayloadEventModel.find(filter)
@@ -78,7 +79,7 @@ export class AppService {
 
       const lastPage = Math.ceil(total / TAKE_SIZE);
 
-      return { total, lastPage, data };
+      return { total, lastPage, data, extra: JSON.stringify(timePayload) };
     } catch (error) {
       Logger.error(error);
       return null;
