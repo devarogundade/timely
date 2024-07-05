@@ -10,6 +10,7 @@ import { TIMELY_CONTRACT, RPC } from "src/config/constants";
 // @ts-ignore
 import Timely from "../abis/Timely.json";
 import { TimePayloadIn } from "src/types";
+import { Logger } from "@nestjs/common";
 
 // Timely Contract Client.
 export class TimelyContract {
@@ -20,7 +21,9 @@ export class TimelyContract {
     constructor() {
         this.web3 = new Web3(RPC);
         this.timely = new this.web3.eth.Contract(Timely.abi as any, TIMELY_CONTRACT);
+    }
 
+    async prepareSigner() {
         this.signer = this.web3.eth.accounts.privateKeyToAccount(
             process.env.PRIVATE_KEY
         );
@@ -30,13 +33,13 @@ export class TimelyContract {
     }
 
     // Function to estimate message fee.
-    async estimateFee(count: number): Promise<number | null> {
+    async estimateFee(indexCount: number): Promise<number | null> {
         try {
             return await this.timely.methods.estimateFee(
-                count
+                indexCount
             ).call();
         } catch (error) {
-            console.log(error);
+            Logger.error(error);
             return null;
         }
     }
@@ -60,7 +63,7 @@ export class TimelyContract {
 
             return receipt.transactionHash;
         } catch (error) {
-            console.log(error);
+            Logger.error(error);
             return null;
         }
     }
@@ -74,7 +77,7 @@ export class TimelyContract {
 
             return isExecutable;
         } catch (error) {
-            console.log(error);
+            Logger.error(error);
             return false;
         }
     }

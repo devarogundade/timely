@@ -20,6 +20,7 @@ export class TimePayloadWorker extends WorkerHost {
         super();
 
         this.timelyContract = new TimelyContract();
+        this.timelyContract.prepareSigner();
     }
 
     async process(job: Job<any, any, string>): Promise<any> {
@@ -49,7 +50,6 @@ export class TimePayloadWorker extends WorkerHost {
                 identifier: timePayload.identifier,
                 index: eventsIndex
             };
-
 
             const transactionHash = await this.timelyContract.postTimelyCallback(
                 timePayload.sender, timePayloadIn

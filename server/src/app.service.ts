@@ -8,6 +8,7 @@ import { TimePayload } from './database/timepayload';
 import { InjectModel } from '@nestjs/mongoose';
 import { TimePayloadEvent } from './database/timepayloadevent';
 import { Paged } from './types';
+import { TimelyContract } from './contracts/timelycontract';
 
 const TAKE_SIZE: number = 15;
 
@@ -25,6 +26,17 @@ export class AppService {
       const blockObject = JSON.parse(json);
       const fromBlock: number | null = blockObject.fromBlock;
       return fromBlock;
+    } catch (error) {
+      Logger.error(error);
+      return null;
+    }
+  }
+
+  async estimateFee(indexCount: number): Promise<number | null> {
+    try {
+      const timelyContract = new TimelyContract();
+      const fee = await timelyContract.estimateFee(indexCount);
+      return fee;
     } catch (error) {
       Logger.error(error);
       return null;

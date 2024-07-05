@@ -15,6 +15,13 @@ export class AppController {
     return this.appService.latestBlock();
   }
 
+  @Get("/estimatefee")
+  async estimateFee(
+    @Query('index_count') indexCount: number = 1,
+  ): Promise<number | null> {
+    return this.appService.estimateFee(indexCount);
+  }
+
   @Get("/timepayloads/all")
   async allTimePayloads(
     @Query('page') page: number = 1,

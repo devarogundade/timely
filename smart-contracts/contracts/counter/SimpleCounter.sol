@@ -23,10 +23,10 @@ contract SimpleCounter is TimelyReceiver {
         // Check if function was called.
         require(_identifier == bytes32(0), "Counter alrady started.");
 
-        // Initial pay for a thousand iterations.
-        uint256 repeatTimes = 10;
+        // Initial pay for 10 iterations.
+        uint256 indexCount = 10;
 
-        uint256 estimatedFee = _timely.estimateFee(repeatTimes);
+        uint256 estimatedFee = _timely.estimateFee(indexCount);
 
         IERC20(_timely.getTimelyToken()).approve(getTimely(), estimatedFee);
 
