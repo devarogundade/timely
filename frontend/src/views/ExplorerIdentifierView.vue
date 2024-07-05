@@ -52,7 +52,7 @@
                                         <td>
                                             <p class="payload_id">{{
                                                 total.valueOf() - ((index) + (15 * (currentPage.valueOf() - 1)))
-                                                }}</p>
+                                            }}</p>
                                         </td>
                                         <td>
                                             <div class="payload_status"
@@ -65,7 +65,7 @@
                                                 <FailedfulIcon />
                                                 <p>Failed</p>
                                             </div>
-                                            <div class="payload_status" v-else>
+                                            <div class="payload_status" v-else-if="indexCount == 0">
                                                 <SuccessfulIcon />
                                                 <p>Condition not met.</p>
                                             </div>
